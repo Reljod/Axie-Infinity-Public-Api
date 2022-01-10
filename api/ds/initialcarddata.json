@@ -1,0 +1,48 @@
+{
+    "cards": [{
+            "card-class": "aqua",
+            "part-name": "blue moon",
+            "card-name": "scale dart",
+            "attack": 120,
+            "shield": 30,
+            "attack-type": "melee",
+            "card-effect": "Draw a card if target is in Last Stand."
+        },
+        {
+            "card-class": "aqua",
+            "part-name": "goldfish",
+            "card-name": "swift escape",
+            "attack": 105,
+            "shield": 20,
+            "attack-type": "melee",
+            "card-effect": "Apply Speed+ to this Axie for 2 rounds when attacked."
+        },
+        {
+            "card-class": "aqua",
+            "part-name": "sponge",
+            "card-name": "shipwreck",
+            "attack": 60,
+            "shield": 90,
+            "attack-type": "melee",
+            "card-effect": "Apply Attack+ to this Axie if its shield breaks."
+        },
+        {
+            "card-class": "aqua",
+            "part-name": "anemone",
+            "card-name": "aqua vitality",
+            "attack": 80,
+            "shield": 35,
+            "attack-type": "melee",
+            "card-effect": "Successful attacks restore 50 HP for each Anemone part this Axie posseses."
+        },
+        {
+            "card-class": "beast",
+            "part-name": "risky beast",
+            "card-name": "revenge arrow",
+            "attack": 125,
+            "shield": 25,
+            "attack-type": "ranged",
+            "card-effect": "Deal 150% damage if this Axie is in Last Stand."
+        }
+    ]
+}
