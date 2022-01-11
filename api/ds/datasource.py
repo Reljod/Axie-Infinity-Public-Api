@@ -1,9 +1,12 @@
-import abc
-from ..models.cards import CardList
+from abc import ABC, abstractmethod
+from ..models.cards import CardFilter
 
-class DataSource(abc.ABC):
+class CardsSource(ABC):
+    """ 
+    Abstract class that gets Card Data from different Data sources
+    like a JSON file, SQL Databases, NoSQL Databases, Flat file, etc.
+    """
     
-    @abc.abstractmethod
-    def get_cards(self):
-        print("Getting Card List from Data Source")
-        raise NotImplementedError
+    @abstractmethod
+    async def get_cards(self):
+        """ Implements getting all cards """

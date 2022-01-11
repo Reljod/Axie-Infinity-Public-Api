@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from enum import Enum, auto
 from typing import List
 from dataclasses import dataclass
+from abc import ABC, abstractmethod
 
 
 class CardAttackType(str, Enum):
@@ -30,28 +31,38 @@ class Card(BaseModel):
     
 class CardList(BaseModel):
     cards: List[Card] = []
+    
+class CardFilter(ABC):
+    
+    @abstractmethod
+    def filter(self, cards: CardList) -> CardList:
+        """ Implementation to filter a list of cards. """
 
-class CardFilter(BaseModel):
+class CardFilterBasic(CardFilter, BaseModel):
     part_name: str | None = None
     card_name: str | None = None
     card_class: AxieType | None = None
     attack_type: CardAttackType | None = None
     
-    def filter(self, card: Card) -> bool:
-        return  self.filter_name(card) and\
-                self.filter_by_card_class(card) and\
-                self.filter_by_attack_type(card)
+    def filter(self, cards: CardList) -> CardList:
+        cards.cards = [card for card in cards.cards if self.is_card_included(card)]
+        return cards
     
-    def filter_name(self, card: Card) -> bool:
+    def is_card_included(self, card: Card) -> bool:
+        return  self.is_name_equals_or_none(card) and\
+                self.is_card_class_equals_or_none(card) and\
+                self.is_attack_type_equals_or_none(card)
+    
+    def is_name_equals_or_none(self, card: Card) -> bool:
         return  self.part_name == card.part_name or\
                 self.card_name == card.card_name or\
                 ( self.part_name is None and\
                   self.card_name is None )
 
-    def filter_by_card_class(self, card: Card) -> bool:
+    def is_card_class_equals_or_none(self, card: Card) -> bool:
         return  self.card_class == card.card_class or\
                 self.card_class is None
     
-    def filter_by_attack_type(self, card: Card) -> bool:
+    def is_attack_type_equals_or_none(self, card: Card) -> bool:
         return  self.attack_type == card.attack_type or\
                 self.attack_type is None

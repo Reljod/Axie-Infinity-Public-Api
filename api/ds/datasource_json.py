@@ -1,13 +1,13 @@
 import json
 
-from .datasource import DataSource
+from .datasource import CardsSource
 from ..models.cards import CardList, Card, CardFilter
 
-class JsonDataSource(DataSource):
+class CardsSourceFromJSON(CardsSource):
     
     CARDS_LIST = "./api/ds/initialcarddata.json"
     
-    async def get_cards(self, filter: CardFilter | None):
+    async def get_cards(self):
         
         cards = await self._read_json_file()
         self.all_cards = cards.get("cards")
@@ -28,8 +28,7 @@ class JsonDataSource(DataSource):
                 card_effect=card.get("card-effect")
             )
             
-            if filter is None or filter.filter(card_obj):
-                card_list.cards.append(card_obj)
+            card_list.cards.append(card_obj)
         
         return card_list
     
