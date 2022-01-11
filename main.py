@@ -1,7 +1,9 @@
 from fastapi import FastAPI, responses, status
 
-from api.ds.datasource_json import JsonDataSource
-from api.models.cards import CardList, CardFilter
+from api.ds.datasource_json import CardsSourceFromJSON
+from api.models.cards import CardList, CardFilterBasic
+from api.models.limit import PaginationLimiter
+from api.endpoints import cards_controller as cc
 
 app = FastAPI()
 
@@ -13,7 +15,11 @@ async def root():
     )
 
 @app.post("/cards", response_model=CardList)
-async def get_cards(filter: CardFilter | None = None):
-    jds = JsonDataSource()
-    cards = await jds.get_cards(filter)
+async def get_cards(
+        filter: CardFilterBasic | None = None, 
+        limiter: PaginationLimiter | None = None):
+    source = CardsSourceFromJSON()
+    cards = await cc.get_cards_controller(
+        source, filter, limiter
+    )
     return cards
