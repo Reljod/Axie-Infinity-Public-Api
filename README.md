@@ -1,6 +1,7 @@
 
+<img src="./images/api-logo.png" style=" float:left ; width:100px ">
 
-# Axie-Infinity-Public-Api<img src="./images/api-logo.png" style=" float:left ; width:100px ">
+# Axie-Infinity-Public-Api
 
 Axie Infinity Public API built in Python Fast API.
 
