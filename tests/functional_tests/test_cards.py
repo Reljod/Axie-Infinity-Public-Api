@@ -1,6 +1,4 @@
 from api.models.cards import CardFilterBasic, Card, CardList, AxieType, CardAttackType
-import pytest
-
 
 test_sample = CardList(cards=[
     Card(
