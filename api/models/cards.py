@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 from enum import Enum, auto
-from typing import List
+from typing import List, Tuple
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
@@ -49,20 +49,25 @@ class CardFilterBasic(CardFilter, BaseModel):
         return cards
     
     def is_card_included(self, card: Card) -> bool:
-        return  self.is_name_equals_or_none(card) and\
-                self.is_card_class_equals_or_none(card) and\
-                self.is_attack_type_equals_or_none(card)
-    
-    def is_name_equals_or_none(self, card: Card) -> bool:
-        return  self.part_name == card.part_name or\
-                self.card_name == card.card_name or\
-                ( self.part_name is None and\
-                  self.card_name is None )
-
-    def is_card_class_equals_or_none(self, card: Card) -> bool:
-        return  self.card_class == card.card_class or\
-                self.card_class is None
-    
-    def is_attack_type_equals_or_none(self, card: Card) -> bool:
-        return  self.attack_type == card.attack_type or\
-                self.attack_type is None
+        
+        is_included : bool = self.is_filter_and_card_equal(
+            (self.part_name, self.card_name, self.card_class, self.attack_type),
+            (card.part_name, card.card_name, card.card_class, card.attack_type)
+        )
+        
+        return is_included
+                
+    def is_filter_and_card_equal(self, 
+                                 filter_parts: Tuple, 
+                                 card_parts: Tuple
+                                ) -> bool:
+        
+        is_included : bool = False
+        
+        for filter_part, card_part in zip(filter_parts, card_parts):
+            if filter_part is None:
+                continue
+            
+            is_included = filter_part == card_part
+        
+        return is_included
