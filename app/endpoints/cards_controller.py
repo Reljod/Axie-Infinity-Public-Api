@@ -1,5 +1,5 @@
-from api.models import cards, limit
-from api.ds import datasource as ds
+from ..models import cards, limit
+from ..ds import datasource as ds
 
 async def get_cards_controller(
         source: ds.CardsSource, 

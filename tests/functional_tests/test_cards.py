@@ -1,4 +1,4 @@
-from api.models.cards import CardFilterBasic, Card, CardList, AxieType, CardAttackType
+from app.models.cards import CardFilterBasic, Card, CardList, AxieType, CardAttackType
 
 test_sample = CardList(cards=[
     Card(

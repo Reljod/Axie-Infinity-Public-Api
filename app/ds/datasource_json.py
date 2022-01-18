@@ -5,7 +5,7 @@ from ..models.cards import CardList, Card, CardFilter
 
 class CardsSourceFromJSON(CardsSource):
     
-    CARDS_LIST = "./api/ds/initialcarddata.json"
+    CARDS_LIST = "./app/ds/initialcarddata.json"
     
     async def get_cards(self):
         

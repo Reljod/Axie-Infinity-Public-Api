@@ -1,10 +1,10 @@
 from fastapi import FastAPI, responses, status
 from fastapi.openapi.utils import get_openapi
 from typing import Dict
-from api.ds.datasource_json import CardsSourceFromJSON
-from api.models.cards import CardList, CardFilterBasic
-from api.models.limit import PaginationLimiter
-from api.endpoints import cards_controller as cc 
+from app.ds.datasource_json import CardsSourceFromJSON
+from app.models.cards import CardList, CardFilterBasic
+from app.models.limit import PaginationLimiter
+from app.endpoints import cards_controller as cc 
 
 app = FastAPI()
 
